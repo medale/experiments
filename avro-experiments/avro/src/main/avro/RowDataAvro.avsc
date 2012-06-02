@@ -1,0 +1,41 @@
+{
+ "namespace": "medale.avro",
+  "name": "RowDataAvro",
+  "type": "record",
+  "fields" : [
+    {"name": "rowId", "type": "string", "doc":"Row ID of entry", "default":"null"},
+    {"name": "columnFamily", "type": ["string","null"], "doc":"ColumnFamily of entry", "default":"null"},
+    {"name": "columnQualifier", "type": ["string","null"], "doc":"ColumnQualifier of entry", "default":"null"},
+    {"name": "visibility", "type": ["string","null"], "doc":"Visibility of entry", "default":"null"},
+    {"name": "timestamp", "type": ["string","null"], "doc":"Timestamp of entry", "default":"null"},
+    {"name": "value", "type": 
+       [
+          {"type":"record", 
+           "name":"KeyValue",
+           "fields": [
+              {"name":"key", "type":"string"},
+              {"name":"value", "type":"string"}
+           ]},
+           {"type":"record", 
+            "name":"KeyValues",
+            "fields": [
+               {"name":"key", "type":"string"},
+               {"name":"values", "type":{"type":"array", "items":"string"}}
+           ]},
+           {"type":"record",
+            "name":"RecursiveKeyValueMapRecord",
+            "fields": [
+               {"name":"map", 
+                "type": {"type":"map", 
+                         "values": 
+                         [ 
+                            "string",
+                            {"type":"array", "items":"string"},
+                            "RecursiveKeyValueMapRecord"
+                         ]}
+               }
+           ]}
+       ]}    
+  ] 
+}
+
