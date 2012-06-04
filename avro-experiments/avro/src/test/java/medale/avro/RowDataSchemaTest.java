@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -105,14 +106,29 @@ public class RowDataSchemaTest {
 			RowDataAvro actualRowData) {
 		RecursiveKeyValueMapRecord expectedRecord = (RecursiveKeyValueMapRecord) expectedRowData.getValue();
 		RecursiveKeyValueMapRecord actualRecord = (RecursiveKeyValueMapRecord) actualRowData.getValue();
-		//TODO: actual comparison (but cast succeeded!)
+		Map<CharSequence, Object> expectedMap = expectedRecord.getMap();
+		Map<CharSequence, Object> actualMap = actualRecord.getMap();
+		assertEquals(expectedMap.size(), actualMap.size());
+		for (Map.Entry<CharSequence, Object> entry : actualMap.entrySet()) {
+			System.out.println("Key: " + entry.getKey() + ": " + entry.getValue());
+		}
 	}
 
 	private void compareKeyValues(RowDataAvro expectedRowData,
 			RowDataAvro actualRowData) {
 		KeyValues expectedKV = (KeyValues) expectedRowData.getValue();
 		KeyValues actualKV = (KeyValues) actualRowData.getValue();
-		//TODO: actual comparison (but cast succeeded!)
+		assertEquals(expectedKV.getKey(), actualKV.getKey().toString());
+		List<CharSequence> expectedValues = expectedKV.getValues();
+		List<CharSequence> actualValues = actualKV.getValues();
+		assertEquals(expectedValues.size(), actualValues.size());
+		Iterator<CharSequence> expectedIterator = expectedValues.iterator();
+		Iterator<CharSequence> actualIterator = actualValues.iterator();
+		while(expectedIterator.hasNext()) {
+			CharSequence expectedCharSeq = expectedIterator.next();
+			CharSequence actualCharSeq = actualIterator.next();
+			assertEquals(expectedCharSeq, actualCharSeq.toString());
+		}
 	}
 
 	private void compareKeyValue(RowDataAvro expectedRowData,
