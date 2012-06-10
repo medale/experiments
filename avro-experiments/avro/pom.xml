@@ -43,6 +43,7 @@
 							<goal>idl-protocol</goal>
 						</goals>
 						<configuration>
+							<stringType>String</stringType>
 							<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
 							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
 							<testSourceDirectory>${project.basedir}/src/test/avro</testSourceDirectory>
