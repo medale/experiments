@@ -1,0 +1,35 @@
+
+@namespace("medale.avro")
+protocol RowDataProtocol {
+
+	record Type {
+	   string tag;
+	   int version;
+	}
+	
+	record TypeValuePair {
+	   Type type;
+	   union{null, int, string, boolean} value;
+	}
+	
+	/** 
+	  Recursive definition - TypeListPair can contain
+	  objects of TypeListPair.
+	*/
+	record TypeListPair {
+	   Type type;
+	   array<union{TypeValuePair, TypeListPair}> items;
+	}
+	
+	record RowDataValue {
+	   array<union{TypeValuePair, TypeListPair}> rowItems;
+	}
+	
+	record RowData {
+	   string rowId;
+	   string columnFamily;
+	   string columnQualifier;
+	   RowDataValue value;
+	}
+	     
+}
