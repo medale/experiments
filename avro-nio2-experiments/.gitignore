@@ -4,3 +4,4 @@
 /src/main/java/com/uebercomputing/FileRecord.java
 /src/main/java/com/uebercomputing/FileRecordProtocol.java
 /.settings
+files.avro
