@@ -1,0 +1,11 @@
+@version("1.0.0")
+@namespace("com.uebercomputing")
+protocol FileRecordProtocol {
+  record FileRecord {
+    string name;
+    string directory;
+    long lastModifiedTime;
+    union{null, map<string>} fileMetadata;
+    bytes headOfContent;
+  }
+} 
